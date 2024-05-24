@@ -31,6 +31,10 @@ window/size/transparent=true
 window/subwindows/embed_subwindows=false
 window/per_pixel_transparency/allowed=true
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/HTTPSSEClient/plugin.cfg")
+
 [input]
 
 exit={

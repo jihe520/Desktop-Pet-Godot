@@ -1,9 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://dkmf1gpprqkdb"]
+[gd_scene load_steps=12 format=3 uid="uid://dkmf1gpprqkdb"]
 
 [ext_resource type="Script" path="res://canvas/canvas.gd" id="1_s7786"]
 [ext_resource type="Texture2D" uid="uid://5m8pylbtdb68" path="res://resources/players grey x3.png" id="2_rulkn"]
 [ext_resource type="Script" path="res://canvas/pet.gd" id="3_ddty2"]
 [ext_resource type="Script" path="res://canvas/dialogue/Dialogue.gd" id="4_mkji5"]
+[ext_resource type="Theme" uid="uid://7wp65kjcrv2s" path="res://themes/main.tres" id="5_1rggm"]
+[ext_resource type="Texture2D" uid="uid://c36m0gk0xqi3o" path="res://resources/dialogue/dialgue_box1.png" id="5_ggo57"]
+[ext_resource type="Script" path="res://canvas/ChatMessageAI.gd" id="5_w2pdf"]
 
 [sub_resource type="Animation" id="Animation_fqk1a"]
 length = 0.001
@@ -43,14 +46,20 @@ _data = {
 "idle": SubResource("Animation_8lixs")
 }
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_o4c6w"]
+texture = ExtResource("5_ggo57")
+
 [node name="Canvas" type="Node2D"]
 position = Vector2(2373, 152)
 script = ExtResource("1_s7786")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="Grapic" type="Node2D" parent="."]
 scale = Vector2(-2, 2)
 
 [node name="Pet" type="Sprite2D" parent="Grapic"]
+position = Vector2(2, 9)
 texture = ExtResource("2_rulkn")
 hframes = 8
 vframes = 13
@@ -75,21 +84,30 @@ autoplay = "idle"
 unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 0
-offset_left = -469.0
-offset_top = -107.0
-offset_right = -85.0
-offset_bottom = 16.0
+offset_left = -541.0
+offset_top = -149.0
+offset_right = -73.0
+offset_bottom = 158.0
 script = ExtResource("4_mkji5")
 
 [node name="PanelContainer" type="PanelContainer" parent="Dialogue"]
-custom_minimum_size = Vector2(50, 60)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_o4c6w")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Dialogue/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Dialogue/PanelContainer"]
 layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 120
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 40
+
+[node name="ChatMessageAI" type="RichTextLabel" parent="Dialogue/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("5_1rggm")
 bbcode_enabled = true
+script = ExtResource("5_w2pdf")
