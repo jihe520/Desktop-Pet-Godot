@@ -1,29 +1,22 @@
 extends  Node
 
+@export var api_key = "sk-f5da402f6833491697cd83910e471ea8"
+@export var model = "qwen-turbo"
 
-## GPT3.5
-"""
-#var url : String = 'https://api.openai.com/v1/chat/completions'
-var url: String = 'https://api.chatanywhere.tech/v1/chat/completions'
-var api_key :String =  'sk-21qKA5RnQak9bespmINCRSr4Zc45uQ1S0Bv8cx7ljXfxTMib'
-var model : String = "gpt-3.5-turbo"
-"""
-
-## DeepSeek
-
-@export var api_key = "sk-696c482afc8b43dda4c707521426353a"
-# var max_tokens = 1024
-@export var temperature = 0.5
-@export var model = "deepseek-chat"
+var host :String = "https://dashscope.aliyuncs.com"
+var path :String= "/compatible-mode/v1/chat/completions"
+var request_url :String = host+path
+var max_tokens = 1024
+var history_count : int
+@export var temperature : float = 0.5
 @export var stream : bool = true
+var top_p:float
 var system_message : Dictionary
+
 var messages = []
 
 var headers = ["Authorization: Bearer " + api_key, "Content-Type: application/json"]
-var host = "https://api.deepseek.com"
-#var host = "https://api.openai.com"
-var path = "/v1/chat/completions"
-var request_url = host+path
+
 
 
 @onready var canvas: Node2D = $Canvas
@@ -35,6 +28,7 @@ var httpsse_client: HTTPSSEClient
 
 func _ready():
 	Globals.send_button_press.connect(_on_Btn_send)
+	Globals.update_request.connect(_on_Btn_update_request)
 	
 	if stream:
 		httpsse_client = HTTPSSEClient.new()
@@ -47,7 +41,9 @@ func _ready():
 	
 	system_message = {"role": "system", "content": "你是一个 godot 助手，你懂得大量的godot游戏引擎的知识."}
 	messages = [system_message]
-
+	
+	if !Globals.json_read("user://request.json").is_empty():
+		request_set(Globals.json_read("user://request.json")["das"])
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -56,11 +52,40 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _on_Btn_send(msg:String):
+	if api_key == "" or model == "" or host == "":
+		$Send.title = "请先配置好“请求”参数"
+		return
+	$Send.title = "SendBox"
 	if stream:
 		chat_message_ai.clear()
 		chat_with_stream(msg)
 	else:
 		chat_without_stream(msg)
+
+func _on_Btn_update_request(request :Dictionary):
+	request_set(request)
+
+
+# 复制请求的参数
+func request_set(preset :Dictionary):
+	host = preset["api"]['host']
+	path = preset['api']['path']
+	api_key = preset["api"]['key']
+	model = preset["api"]["model"]
+	
+	stream = preset['parameters']['stream']
+	temperature = preset['parameters']['temperature']
+	top_p = preset['parameters']['topp']
+	history_count = preset['parameters']['historycount']
+	max_tokens = preset['parameters']['maxtokens']
+	system_message = {"role": "system", "content": preset['parameters']['systemprompt'] }
+	
+	request_url = host + path
+	headers = ["Authorization: Bearer " + api_key, "Content-Type: application/json"]
+	messages = [system_message]
+	if !Globals.presets.has(preset["name"]):
+		Globals.presets[preset["name"]] = preset
+	Globals.json_store_file(Globals.presets)
 
 func chat_msg_add(msg:String):
 	if stream:
@@ -76,7 +101,8 @@ func chat_with_stream(prompt:String):
 		"messages": messages,
 		"stream": true,
 		"temperature": temperature,
-		"model": model
+		"model": model,
+		"top_p": top_p
 	})
 	httpsse_client.connect_to_host(host, path, headers, request_body, chat_message_ai, 443)
 

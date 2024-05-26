@@ -2,7 +2,7 @@ extends HBoxContainer
 
 var dragging : bool = false
 var mouse_offset : Vector2i
-@onready var send: Window = $"../../../../.."
+#@onready var send: Window = $"../../../../.."
 
 
 #func _input(event: InputEvent) -> void:
