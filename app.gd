@@ -1,10 +1,10 @@
 extends  Node
 
-@export var api_key = "sk-f5da402f6833491697cd83910e471ea8"
-@export var model = "qwen-turbo"
+@export var api_key = "sk-21qKA5RnQak9bespmINCRSr4Zc45uQ1S0Bv8cx7ljXfxTMib"
+@export var model = "gpt-4o"
 
-var host :String = "https://dashscope.aliyuncs.com"
-var path :String= "/compatible-mode/v1/chat/completions"
+var host :String = "https://api.chatanywhere.com.cn"
+var path :String= "/v1/chat/completions"
 var request_url :String = host+path
 var max_tokens = 1024
 var history_count : int
@@ -39,11 +39,11 @@ func _ready():
 		add_child(http_request)
 		http_request.request_completed.connect(_on_request_completed)
 	
-	system_message = {"role": "system", "content": "你是一个 godot 助手，你懂得大量的godot游戏引擎的知识."}
+	system_message = {"role": "system", "content": "回复简短"}
 	messages = [system_message]
 	
-	if !Globals.json_read("user://request.json").is_empty():
-		request_set(Globals.json_read("user://request.json")["das"])
+	#if !Globals.json_read("user://request.json").is_empty():
+		#request_set(Globals.json_read("user://request.json")["das"])
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -51,16 +51,17 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_tree().quit()
 
 
-func _on_Btn_send(msg:String):
+func _on_Btn_send(content:Array):
 	if api_key == "" or model == "" or host == "":
 		$Send.title = "请先配置好“请求”参数"
 		return
 	$Send.title = "SendBox"
 	if stream:
 		chat_message_ai.clear()
-		chat_with_stream(msg)
+		chat_with_stream(content)
 	else:
-		chat_without_stream(msg)
+		#chat_without_stream(content)
+		pass
 
 func _on_Btn_update_request(request :Dictionary):
 	request_set(request)
@@ -89,13 +90,14 @@ func request_set(preset :Dictionary):
 
 func chat_msg_add(msg:String):
 	if stream:
-		chat_message_ai.add_text(msg)
+		if msg != "[EMPTY DELTA]":
+			chat_message_ai.add_text(msg)
 	else:
 		chat_message_ai.text = msg
 
 ## 发送请求
-func chat_with_stream(prompt:String):
-	var msg = {"role": "user", "content": prompt}
+func chat_with_stream(content):
+	var msg = {"role": "user", "content": content}
 	messages.append(msg)
 	var request_body = JSON.stringify({
 		"messages": messages,
