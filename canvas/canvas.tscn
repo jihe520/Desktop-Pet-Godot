@@ -1,12 +1,12 @@
 [gd_scene load_steps=12 format=3 uid="uid://dkmf1gpprqkdb"]
 
 [ext_resource type="Script" path="res://canvas/canvas.gd" id="1_s7786"]
-[ext_resource type="Texture2D" uid="uid://5m8pylbtdb68" path="res://resources/players grey x3.png" id="2_rulkn"]
-[ext_resource type="Script" path="res://canvas/pet.gd" id="3_ddty2"]
-[ext_resource type="Script" path="res://canvas/dialogue/Dialogue.gd" id="4_mkji5"]
+[ext_resource type="Script" path="res://canvas/grapic/grapic.gd" id="2_a65q2"]
+[ext_resource type="Texture2D" uid="uid://5m8pylbtdb68" path="res://resources/characters/players grey x3.png" id="3_f3t4w"]
+[ext_resource type="Script" path="res://canvas/dialogue/dialogue.gd" id="4_lp7mw"]
 [ext_resource type="Theme" uid="uid://7wp65kjcrv2s" path="res://themes/main.tres" id="5_1rggm"]
 [ext_resource type="Texture2D" uid="uid://c36m0gk0xqi3o" path="res://resources/dialogue/dialgue_box1.png" id="5_ggo57"]
-[ext_resource type="Script" path="res://canvas/ChatMessageAI.gd" id="5_w2pdf"]
+[ext_resource type="Script" path="res://canvas/dialogue/chat_message_ai.gd" id="7_4g7g5"]
 
 [sub_resource type="Animation" id="Animation_fqk1a"]
 length = 0.001
@@ -57,28 +57,29 @@ metadata/_edit_group_ = true
 
 [node name="Grapic" type="Node2D" parent="."]
 scale = Vector2(-2, 2)
+script = ExtResource("2_a65q2")
 
 [node name="Pet" type="Sprite2D" parent="Grapic"]
-position = Vector2(2, 9)
-texture = ExtResource("2_rulkn")
+position = Vector2(-5, 8)
+texture = ExtResource("3_f3t4w")
 hframes = 8
 vframes = 13
 frame = 73
-script = ExtResource("3_ddty2")
-
-[node name="Area2D" type="Area2D" parent="Grapic/Pet"]
-
-[node name="ClickPolygon" type="CollisionPolygon2D" parent="Grapic/Pet/Area2D"]
-unique_name_in_owner = true
-self_modulate = Color(1, 1, 1, 0.105882)
-polygon = PackedVector2Array(274, 64, -64, 64, -64, -64, 275, -64)
-disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Grapic/Pet"]
 libraries = {
 "": SubResource("AnimationLibrary_tibt3")
 }
 autoplay = "idle"
+
+[node name="Area2D" type="Area2D" parent="Grapic"]
+position = Vector2(2, 9)
+
+[node name="ClickPolygon" type="CollisionPolygon2D" parent="Grapic/Area2D"]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0.105882)
+polygon = PackedVector2Array(274, 64, -64, 64, -64, -64, 275, -64)
+disabled = true
 
 [node name="Dialogue" type="Control" parent="."]
 unique_name_in_owner = true
@@ -88,7 +89,7 @@ offset_left = -541.0
 offset_top = -149.0
 offset_right = -73.0
 offset_bottom = 158.0
-script = ExtResource("4_mkji5")
+script = ExtResource("4_lp7mw")
 
 [node name="PanelContainer" type="PanelContainer" parent="Dialogue"]
 layout_mode = 1
@@ -110,4 +111,4 @@ theme_override_constants/margin_bottom = 40
 layout_mode = 2
 theme = ExtResource("5_1rggm")
 bbcode_enabled = true
-script = ExtResource("5_w2pdf")
+script = ExtResource("7_4g7g5")

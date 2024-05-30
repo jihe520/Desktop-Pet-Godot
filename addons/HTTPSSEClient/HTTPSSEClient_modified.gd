@@ -104,8 +104,9 @@ func get_open_ai_events_data(string_body: String) -> Array:
 		if entry == "data: [DONE]":
 			results.append("[DONE]")
 			continue
-
+		
 		entry = entry.replace("data: ", "")
+		print("Processing entry: ", entry)  # Debugging line
 		var parsed_data = JSON.parse_string(entry)
 		if parsed_data == null:
 			printerr("Error: Received data is not a valid JSON object")

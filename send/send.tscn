@@ -1,17 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://dsohs7cemnsss"]
+[gd_scene load_steps=5 format=3 uid="uid://dsohs7cemnsss"]
 
-[ext_resource type="Script" path="res://send/Send.gd" id="1_7sj3p"]
-[ext_resource type="Script" path="res://send/ToolBar.gd" id="2_26xxa"]
-[ext_resource type="Script" path="res://send/SendBar.gd" id="3_hd3j1"]
-[ext_resource type="Script" path="res://send/ChatMsgEdit.gd" id="4_igwet"]
-[ext_resource type="PackedScene" uid="uid://h2ghtx4klqip" path="res://send/request/preset.tscn" id="5_7jlah"]
+[ext_resource type="Script" path="res://send/send.gd" id="1_875b0"]
+[ext_resource type="Script" path="res://send/chat_box/chat_msg_edit.gd" id="2_l2itr"]
+[ext_resource type="Script" path="res://send/store_preset/store_preset.gd" id="3_hthny"]
+[ext_resource type="PackedScene" uid="uid://h2ghtx4klqip" path="res://send/edit_preset/preset.tscn" id="5_0uube"]
 
 [node name="Send" type="Window"]
 title = "SendBox"
-position = Vector2i(806, 618)
-size = Vector2i(600, 125)
+position = Vector2i(806, 303)
+size = Vector2i(600, 500)
 always_on_top = true
-script = ExtResource("1_7sj3p")
+script = ExtResource("1_875b0")
 
 [node name="TabContainer" type="TabContainer" parent="."]
 anchors_preset = 15
@@ -21,8 +20,10 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+current_tab = 1
 
 [node name="对话栏" type="Control" parent="TabContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -46,31 +47,14 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="ToolBar" type="HBoxContainer" parent="TabContainer/对话栏/MarginContainer/PanelContainer/BoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
-script = ExtResource("2_26xxa")
-
-[node name="ExitSend" type="Button" parent="TabContainer/对话栏/MarginContainer/PanelContainer/BoxContainer/ToolBar"]
-layout_mode = 2
-text = "关闭输入栏"
-
-[node name="ExitCharacter" type="Button" parent="TabContainer/对话栏/MarginContainer/PanelContainer/BoxContainer/ToolBar"]
-layout_mode = 2
-text = "关闭角色"
-
-[node name="ExitDialogue" type="Button" parent="TabContainer/对话栏/MarginContainer/PanelContainer/BoxContainer/ToolBar"]
-layout_mode = 2
-text = "关闭对话栏"
-
-[node name="Setting" type="Button" parent="TabContainer/对话栏/MarginContainer/PanelContainer/BoxContainer/ToolBar"]
-layout_mode = 2
-text = "设置"
 
 [node name="SendBar" type="HBoxContainer" parent="TabContainer/对话栏/MarginContainer/PanelContainer/BoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
-script = ExtResource("3_hd3j1")
 
 [node name="ChatMsgEdit" type="TextEdit" parent="TabContainer/对话栏/MarginContainer/PanelContainer/BoxContainer/SendBar"]
 unique_name_in_owner = true
@@ -78,18 +62,46 @@ custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.0
-script = ExtResource("4_igwet")
+script = ExtResource("2_l2itr")
 
 [node name="Button" type="Button" parent="TabContainer/对话栏/MarginContainer/PanelContainer/BoxContainer/SendBar"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Send"
 
-[node name="编辑预设" parent="TabContainer" instance=ExtResource("5_7jlah")]
+[node name="存储预设" type="Control" parent="TabContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+script = ExtResource("3_hthny")
+
+[node name="PanelContainer" type="PanelContainer" parent="TabContainer/存储预设"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/存储预设/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/存储预设/PanelContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="存储的预设" type="Control" parent="TabContainer"]
-visible = false
+[node name="PresetsContainer" type="GridContainer" parent="TabContainer/存储预设/PanelContainer/MarginContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 5
+theme_override_constants/v_separation = 5
+columns = 4
+
+[node name="编辑预设" parent="TabContainer" instance=ExtResource("5_0uube")]
 layout_mode = 2
 
 [connection signal="close_requested" from="." to="." method="_on_close_requested"]

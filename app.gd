@@ -1,20 +1,21 @@
 extends  Node
 
-@export var api_key = "sk-21qKA5RnQak9bespmINCRSr4Zc45uQ1S0Bv8cx7ljXfxTMib"
-@export var model = "gpt-4o"
+# model request setting
+var api_key :String = ""
+var model :String = ""
+var host :String = "https://api.openai.com"
+var path :String = "/v1/chat/completions"
 
-var host :String = "https://api.chatanywhere.com.cn"
-var path :String= "/v1/chat/completions"
+# model paramenter setting
+var max_tokens :int = 3000
+var history_count :int = 5
+var temperature :float = 0.5
+var stream :bool = true
+var top_p :float
+var system_message :Dictionary
+
+var chat = []
 var request_url :String = host+path
-var max_tokens = 1024
-var history_count : int
-@export var temperature : float = 0.5
-@export var stream : bool = true
-var top_p:float
-var system_message : Dictionary
-
-var messages = []
-
 var headers = ["Authorization: Bearer " + api_key, "Content-Type: application/json"]
 
 
@@ -28,7 +29,7 @@ var httpsse_client: HTTPSSEClient
 
 func _ready():
 	Globals.send_button_press.connect(_on_Btn_send)
-	Globals.update_request.connect(_on_Btn_update_request)
+	Globals.update_request.connect(_on_Btn_update_preset)
 	
 	if stream:
 		httpsse_client = HTTPSSEClient.new()
@@ -39,16 +40,20 @@ func _ready():
 		add_child(http_request)
 		http_request.request_completed.connect(_on_request_completed)
 	
-	system_message = {"role": "system", "content": "回复简短"}
-	messages = [system_message]
+	system_message = {"role": "system", "content": "简短回复"}
 	
-	#if !Globals.json_read("user://request.json").is_empty():
-		#request_set(Globals.json_read("user://request.json")["das"])
+	load_preset()
+
+func load_preset():
+	if !Globals.current_preset.is_empty():
+		preset_set(Globals.current_preset)
+	
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("exit"):
 		get_tree().quit()
+		get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
 
 
 func _on_Btn_send(content:Array):
@@ -60,15 +65,14 @@ func _on_Btn_send(content:Array):
 		chat_message_ai.clear()
 		chat_with_stream(content)
 	else:
-		#chat_without_stream(content)
-		pass
+		chat_without_stream(content)
 
-func _on_Btn_update_request(request :Dictionary):
-	request_set(request)
+func _on_Btn_update_preset(preset :Dictionary):
+	preset_set(preset)
 
 
 # 复制请求的参数
-func request_set(preset :Dictionary):
+func preset_set(preset :Dictionary):
 	host = preset["api"]['host']
 	path = preset['api']['path']
 	api_key = preset["api"]['key']
@@ -83,22 +87,16 @@ func request_set(preset :Dictionary):
 	
 	request_url = host + path
 	headers = ["Authorization: Bearer " + api_key, "Content-Type: application/json"]
-	messages = [system_message]
-	if !Globals.presets.has(preset["name"]):
-		Globals.presets[preset["name"]] = preset
-	Globals.json_store_file(Globals.presets)
-
-func chat_msg_add(msg:String):
-	if stream:
-		if msg != "[EMPTY DELTA]":
-			chat_message_ai.add_text(msg)
-	else:
-		chat_message_ai.text = msg
 
 ## 发送请求
 func chat_with_stream(content):
-	var msg = {"role": "user", "content": content}
-	messages.append(msg)
+	var messages = [system_message]
+	var last_N_messages = chat.slice(-history_count, chat.size(), 1) 
+	messages.append_array(last_N_messages)
+	
+	var new_message = {"role": "user", "content": content} 
+	messages.append(new_message)
+	
 	var request_body = JSON.stringify({
 		"messages": messages,
 		"stream": true,
@@ -108,9 +106,14 @@ func chat_with_stream(content):
 	})
 	httpsse_client.connect_to_host(host, path, headers, request_body, chat_message_ai, 443)
 
-func chat_without_stream(prompt:String):
-	var msg = {"role": "user", "content": prompt}
-	messages.append(msg)
+func chat_without_stream(content):
+	var messages = [system_message]
+	var last_N_messages = chat.slice(-history_count, chat.size(), 1) 
+	messages.append_array(last_N_messages)
+	
+	var new_message = {"role": "user", "content": content} 
+	messages.append(new_message)
+	
 	var request_body = JSON.stringify({
 		"messages": messages,
 		"temperature": temperature,
@@ -120,8 +123,6 @@ func chat_without_stream(prompt:String):
 	
 	if err != OK:
 		print("Error initiating HTTP request: ", err)
-		
-		
 
 ## 返回请求
 func _on_request_completed(_result, _response_code, _headers, body):
@@ -135,6 +136,18 @@ func _on_request_completed(_result, _response_code, _headers, body):
 func _on_new_sse_event(partial_reply: Array, _ai_status_message: ChatMessageAI):
 	for msg in partial_reply:
 		if msg == '[DONE]':
+			# reply is over
 			httpsse_client.close_connection()
+			chat.append({"role": "assistant", "content":chat_message_ai.text})
+			Globals.is_busy = false
+		elif msg == "[EMPTY DELTA]":
+			continue
 		else:
 			chat_msg_add(msg)
+
+func chat_msg_add(msg:String):
+	if stream:
+		chat_message_ai.add_text(msg)
+	else:
+		chat_message_ai.text = msg
+

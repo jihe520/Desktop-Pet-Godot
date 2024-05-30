@@ -1,13 +1,6 @@
-[gd_scene format=3 uid="uid://c72cr8byw6apu"]
+[gd_scene load_steps=2 format=3 uid="uid://c72cr8byw6apu"]
+
+[ext_resource type="Script" path="res://test/test.gd" id="1_gwm6m"]
 
 [node name="test" type="Node"]
-
-[node name="Window" type="Window" parent="."]
-position = Vector2i(100, 100)
-
-[node name="PanelContainer" type="PanelContainer" parent="Window"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+script = ExtResource("1_gwm6m")
