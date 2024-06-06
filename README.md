@@ -1,5 +1,3 @@
-![](D:\Code\godot\godot-project\desktop-pet\img\Warrior_Blue.png)
-
 <h1 align="center">🐶 Godog 🐶</h1>
 <h2 align="center">AI Godot 桌宠</h2>
 
@@ -15,8 +13,7 @@
 - 支持多模态
 - 在此基础上，方便构建自己的 AI 桌宠
 
-![image-20240606152325951](D:\Code\godot\godot-project\desktop-pet\img\example.png)
-
+![](/img/example.png)
 
 ## 📙 使用手册
 
@@ -89,7 +86,7 @@
 ## 🤝 贡献
 
 
-项目目前处于开发阶段，还存在许多 Bug，我真着手修复。
+项目目前处于开发阶段，还存在许多 Bug，我正着手修复。
 欢迎任何贡献，即使细微。
 添加角色素材等等
 
