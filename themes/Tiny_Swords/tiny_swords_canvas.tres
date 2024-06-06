@@ -1,0 +1,13 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://bn50jp1pavmmx"]
+
+[ext_resource type="FontFile" uid="uid://4ox4ebvuv7qk" path="res://themes/Tiny_Swords/assets/fonts/LXGWNeoXiHei.ttf" id="1_h3w4b"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lj7mo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ddhj5"]
+
+[resource]
+default_font = ExtResource("1_h3w4b")
+RichTextLabel/colors/default_color = Color(1, 0.996094, 0.996094, 1)
+RichTextLabel/styles/normal = SubResource("StyleBoxTexture_lj7mo")
+VScrollBar/styles/scroll = SubResource("StyleBoxEmpty_ddhj5")

@@ -14,8 +14,9 @@ config/name="Desktop-Pet-Godot"
 config/description="🚀 🚀 🚀 一款由大语言模型驱动、Godot 制作的 AI 桌宠，旨在提供一个全能的、丰富的桌面AI宠物。"
 run/main_scene="res://app.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
+run/low_processor_mode=true
 boot_splash/bg_color=Color(0.141176, 0.141176, 0.141176, 0)
-boot_splash/image="res://resources/UI/transparent.png"
+boot_splash/image="res://themes/Base_Canvas/assets/UI/transparent.png"
 config/icon="res://icon.svg"
 
 [autoload]

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dsohs7cemnsss"]
+[gd_scene load_steps=6 format=3 uid="uid://dsohs7cemnsss"]
 
 [ext_resource type="Script" path="res://send/send.gd" id="1_875b0"]
 [ext_resource type="Script" path="res://send/chat_box/chat_msg_edit.gd" id="2_l2itr"]
 [ext_resource type="Script" path="res://send/store_preset/store_preset.gd" id="3_hthny"]
 [ext_resource type="PackedScene" uid="uid://h2ghtx4klqip" path="res://send/edit_preset/preset.tscn" id="5_0uube"]
+[ext_resource type="PackedScene" uid="uid://c3qe413dfh71i" path="res://send/themes/themes.tscn" id="5_1e2g1"]
 
 [node name="Send" type="Window"]
 title = "SendBox"
@@ -20,7 +21,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-current_tab = 1
+current_tab = 3
 
 [node name="对话栏" type="Control" parent="TabContainer"]
 visible = false
@@ -71,6 +72,7 @@ text = "Send"
 
 [node name="存储预设" type="Control" parent="TabContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 script = ExtResource("3_hthny")
 
@@ -102,6 +104,9 @@ theme_override_constants/v_separation = 5
 columns = 4
 
 [node name="编辑预设" parent="TabContainer" instance=ExtResource("5_0uube")]
+layout_mode = 2
+
+[node name="主题" parent="TabContainer" instance=ExtResource("5_1e2g1")]
 layout_mode = 2
 
 [connection signal="close_requested" from="." to="." method="_on_close_requested"]

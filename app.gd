@@ -18,18 +18,17 @@ var chat = []
 var request_url :String = host+path
 var headers = ["Authorization: Bearer " + api_key, "Content-Type: application/json"]
 
-
-
 @onready var canvas: Node2D = $Canvas
-@onready var chat_message_ai: ChatMessageAI = $Canvas/Dialogue/PanelContainer/MarginContainer/ChatMessageAI
+@onready var chat_message_ai: ChatMessageAI = find_child("ChatMessageAI")
 
 var http_request : HTTPRequest
 var httpsse_client: HTTPSSEClient 
 
-
 func _ready():
 	Globals.send_button_press.connect(_on_Btn_send)
 	Globals.update_request.connect(_on_Btn_update_preset)
+	Globals.change_canvas.connect(_on_change_canvas)
+	
 	
 	if stream:
 		httpsse_client = HTTPSSEClient.new()
@@ -43,6 +42,21 @@ func _ready():
 	system_message = {"role": "system", "content": "简短回复"}
 	
 	load_preset()
+
+var old_node_name := "Canvas"
+func _on_change_canvas(path:String):
+	var CANVANS := load(path)
+	var new_canvas = CANVANS.instantiate()
+	
+	var app_node = get_node("/root/App")
+	
+	app_node.get_node(str(old_node_name)).free()
+	app_node.add_child(new_canvas)
+	canvas = new_canvas
+	
+	chat_message_ai = get_node("/root/App/"+ new_canvas.name +"/Dialogue/PanelContainer/MarginContainer/ChatMessageAI")
+	
+	old_node_name = str(new_canvas.name)
 
 func load_preset():
 	if !Globals.current_preset.is_empty():
@@ -69,7 +83,6 @@ func _on_Btn_send(content:Array):
 
 func _on_Btn_update_preset(preset :Dictionary):
 	preset_set(preset)
-
 
 # 复制请求的参数
 func preset_set(preset :Dictionary):
@@ -140,8 +153,12 @@ func _on_new_sse_event(partial_reply: Array, _ai_status_message: ChatMessageAI):
 			httpsse_client.close_connection()
 			chat.append({"role": "assistant", "content":chat_message_ai.text})
 			Globals.is_busy = false
+# hide diague
+			canvas.start_hide_dialogue()
 		elif msg == "[EMPTY DELTA]":
 			continue
+		elif msg == "[ERROR]":
+			pass
 		else:
 			chat_msg_add(msg)
 
@@ -150,4 +167,6 @@ func chat_msg_add(msg:String):
 		chat_message_ai.add_text(msg)
 	else:
 		chat_message_ai.text = msg
+
+
 

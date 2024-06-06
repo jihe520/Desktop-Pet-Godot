@@ -1,0 +1,120 @@
+[gd_scene load_steps=12 format=3 uid="uid://dkmf1gpprqkdb"]
+
+[ext_resource type="Script" path="res://themes/Base_Canvas/canvas.gd" id="1_s7786"]
+[ext_resource type="Script" path="res://themes/Base_Canvas/grapic/grapic.gd" id="2_a65q2"]
+[ext_resource type="Texture2D" uid="uid://5m8pylbtdb68" path="res://themes/Base_Canvas/assets/characters/players grey x3.png" id="3_s54au"]
+[ext_resource type="Theme" uid="uid://7wp65kjcrv2s" path="res://themes/Base_Canvas/main.tres" id="4_j53t2"]
+[ext_resource type="Script" path="res://themes/Base_Canvas/dialogue/dialogue.gd" id="4_lp7mw"]
+[ext_resource type="Texture2D" uid="uid://c36m0gk0xqi3o" path="res://themes/Base_Canvas/assets/dialogue/dialgue_box1.png" id="6_be7al"]
+[ext_resource type="Script" path="res://themes/Base_Canvas/dialogue/chat_message_ai.gd" id="7_4g7g5"]
+
+[sub_resource type="Animation" id="Animation_fqk1a"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [73]
+}
+
+[sub_resource type="Animation" id="Animation_8lixs"]
+resource_name = "idle"
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [72, 73, 74, 75, 76]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tibt3"]
+_data = {
+"RESET": SubResource("Animation_fqk1a"),
+"idle": SubResource("Animation_8lixs")
+}
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_o4c6w"]
+texture = ExtResource("6_be7al")
+
+[node name="Canvas" type="Node2D"]
+position = Vector2(2373, 152)
+script = ExtResource("1_s7786")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Grapic" type="Node2D" parent="."]
+scale = Vector2(-2, 2)
+script = ExtResource("2_a65q2")
+
+[node name="Pet" type="Sprite2D" parent="Grapic"]
+position = Vector2(-5, 8)
+texture = ExtResource("3_s54au")
+hframes = 8
+vframes = 13
+frame = 73
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Grapic/Pet"]
+libraries = {
+"": SubResource("AnimationLibrary_tibt3")
+}
+autoplay = "idle"
+
+[node name="Area2D" type="Area2D" parent="Grapic"]
+position = Vector2(2, 9)
+
+[node name="ClickPolygon" type="CollisionPolygon2D" parent="Grapic/Area2D"]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0.105882)
+polygon = PackedVector2Array(274, 64, -64, 64, -64, -64, 275, -64)
+disabled = true
+
+[node name="Dialogue_Timer" type="Timer" parent="."]
+wait_time = 20.0
+one_shot = true
+autostart = true
+
+[node name="Dialogue" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = -541.0
+offset_top = -149.0
+offset_right = -73.0
+offset_bottom = 158.0
+theme = ExtResource("4_j53t2")
+script = ExtResource("4_lp7mw")
+
+[node name="PanelContainer" type="PanelContainer" parent="Dialogue"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_o4c6w")
+
+[node name="MarginContainer" type="MarginContainer" parent="Dialogue/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 120
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 40
+
+[node name="ChatMessageAI" type="RichTextLabel" parent="Dialogue/PanelContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+bbcode_enabled = true
+script = ExtResource("7_4g7g5")

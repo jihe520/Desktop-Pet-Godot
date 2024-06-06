@@ -8,6 +8,8 @@ signal update_request(presets :Dictionary)
 
 signal add_new_preset_button(preset :Dictionary)
 
+signal change_canvas(path :String)
+
 const SAVE_PATH := "user://presets.json"
 
 const CURRENT_PRESET_SAVE_PATH = "user://current_presets.json"

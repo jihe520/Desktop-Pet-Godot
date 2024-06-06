@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://h2ghtx4klqip"]
 
 [ext_resource type="Script" path="res://send/edit_preset/preset.gd" id="1_8tp2p"]
-[ext_resource type="Theme" uid="uid://7wp65kjcrv2s" path="res://themes/main.tres" id="2_vgwhq"]
+[ext_resource type="Theme" uid="uid://7wp65kjcrv2s" path="res://themes/Base_Canvas/main.tres" id="2_nacpe"]
 
 [node name="编辑预设" type="Control"]
 visible = false
@@ -46,7 +46,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource("2_vgwhq")
+theme = ExtResource("2_nacpe")
 columns = 2
 
 [node name="NameLabel" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/Model/MarginContainer/ModelGrid"]

@@ -1,14 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://c2s5ftqtdj82m"]
 
 [ext_resource type="Script" path="res://app.gd" id="1_8qkjp"]
-[ext_resource type="PackedScene" uid="uid://dkmf1gpprqkdb" path="res://canvas/canvas.tscn" id="2_g0u3y"]
+[ext_resource type="PackedScene" uid="uid://dkmf1gpprqkdb" path="res://themes/Base_Canvas/canvas.tscn" id="2_g0u3y"]
 [ext_resource type="PackedScene" uid="uid://dsohs7cemnsss" path="res://send/send.tscn" id="6_h0gyl"]
 
 [node name="App" type="Node"]
 script = ExtResource("1_8qkjp")
 
-[node name="Canvas" parent="." instance=ExtResource("2_g0u3y")]
-
 [node name="Send" parent="." instance=ExtResource("6_h0gyl")]
 position = Vector2i(756, 455)
 size = Vector2i(650, 400)
+
+[node name="Canvas" parent="." instance=ExtResource("2_g0u3y")]
