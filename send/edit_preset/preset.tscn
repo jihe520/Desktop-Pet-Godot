@@ -1,0 +1,246 @@
+[gd_scene load_steps=3 format=3 uid="uid://h2ghtx4klqip"]
+
+[ext_resource type="Script" path="res://send/edit_preset/preset.gd" id="1_8tp2p"]
+[ext_resource type="Theme" uid="uid://7wp65kjcrv2s" path="res://themes/Base_Canvas/main.tres" id="2_nacpe"]
+
+[node name="编辑预设" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_8tp2p")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Model" type="PanelContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/Model"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+
+[node name="ModelGrid" type="GridContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/Model/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_nacpe")
+columns = 2
+
+[node name="NameLabel" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/Model/MarginContainer/ModelGrid"]
+layout_mode = 2
+text = "名称"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Name" type="LineEdit" parent="MarginContainer/ScrollContainer/VBoxContainer/Model/MarginContainer/ModelGrid"]
+layout_mode = 2
+
+[node name="TypeLabel" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/Model/MarginContainer/ModelGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "API形式"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Type" type="OptionButton" parent="MarginContainer/ScrollContainer/VBoxContainer/Model/MarginContainer/ModelGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+item_count = 4
+selected = 0
+popup/item_0/text = "OpenAI"
+popup/item_0/id = 4
+popup/item_1/text = "DeepSeek"
+popup/item_1/id = 0
+popup/item_2/text = "Qwen"
+popup/item_2/id = 1
+popup/item_3/text = "Yi"
+popup/item_3/id = 2
+
+[node name="HostLabel" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/Model/MarginContainer/ModelGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "host"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Host" type="LineEdit" parent="MarginContainer/ScrollContainer/VBoxContainer/Model/MarginContainer/ModelGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "https://api.openai.com"
+
+[node name="PathLabel" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/Model/MarginContainer/ModelGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Path"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Path" type="LineEdit" parent="MarginContainer/ScrollContainer/VBoxContainer/Model/MarginContainer/ModelGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "/v1/chat/completions"
+
+[node name="KeyLabel" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/Model/MarginContainer/ModelGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "API Key"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Key" type="LineEdit" parent="MarginContainer/ScrollContainer/VBoxContainer/Model/MarginContainer/ModelGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ModelLabel" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/Model/MarginContainer/ModelGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "模型名称"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Model" type="LineEdit" parent="MarginContainer/ScrollContainer/VBoxContainer/Model/MarginContainer/ModelGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "gpt-4o"
+
+[node name="Parament" type="PanelContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/Parament"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+
+[node name="ParamentGrid" type="GridContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/Parament/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
+
+[node name="StreamLabel" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/Parament/MarginContainer/ParamentGrid"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "stream流式输出"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Stream" type="CheckButton" parent="MarginContainer/ScrollContainer/VBoxContainer/Parament/MarginContainer/ParamentGrid"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+button_pressed = true
+
+[node name="TemperatureLabel" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/Parament/MarginContainer/ParamentGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "temperature"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Temperature" type="LineEdit" parent="MarginContainer/ScrollContainer/VBoxContainer/Parament/MarginContainer/ParamentGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "1.0"
+
+[node name="TopPLabel" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/Parament/MarginContainer/ParamentGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "top_p"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TopP" type="LineEdit" parent="MarginContainer/ScrollContainer/VBoxContainer/Parament/MarginContainer/ParamentGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "0.3"
+
+[node name="HistoryCountLabel" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/Parament/MarginContainer/ParamentGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "附带历史消息条数"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HistoryCount" type="LineEdit" parent="MarginContainer/ScrollContainer/VBoxContainer/Parament/MarginContainer/ParamentGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "5"
+
+[node name="MaxTokensLabel" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/Parament/MarginContainer/ParamentGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "max_tokens"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MaxTokens" type="LineEdit" parent="MarginContainer/ScrollContainer/VBoxContainer/Parament/MarginContainer/ParamentGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "3000"
+
+[node name="SystemPromptLabel" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/Parament/MarginContainer/ParamentGrid"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "系统提示词"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SystemPrompt" type="TextEdit" parent="MarginContainer/ScrollContainer/VBoxContainer/Parament/MarginContainer/ParamentGrid"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "you are a helpful helper"
+
+[node name="Button" type="Button" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "保存(修改)"
+
+[connection signal="text_changed" from="MarginContainer/ScrollContainer/VBoxContainer/Model/MarginContainer/ModelGrid/Name" to="." method="_on_name_text_changed"]
+[connection signal="item_selected" from="MarginContainer/ScrollContainer/VBoxContainer/Model/MarginContainer/ModelGrid/Type" to="." method="_on_type_item_selected"]
+[connection signal="pressed" from="MarginContainer/ScrollContainer/VBoxContainer/Parament/MarginContainer/ParamentGrid/Stream" to="." method="_on_stream_pressed"]
+[connection signal="pressed" from="MarginContainer/ScrollContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]

@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3qe413dfh71i"]
+
+[ext_resource type="Script" path="res://send/themes/themes.gd" id="1_5dral"]
+
+[node name="主题" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_5dral")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/MarginContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
