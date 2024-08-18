@@ -1,190 +1,39 @@
-[gd_scene load_steps=17 format=3 uid="uid://u4f1it53avo1"]
+[gd_scene load_steps=7 format=3 uid="uid://dwq0v03xrg4u3"]
 
-[ext_resource type="Script" path="res://themes/Tiny_Swords/tiny_swords_canvas.gd" id="1_k04u4"]
-[ext_resource type="Script" path="res://themes/Tiny_Swords/grapic/grapic.gd" id="2_ff0a0"]
+[ext_resource type="PackedScene" uid="uid://dkmf1gpprqkdb" path="res://themes/Base_Canvas/canvas.tscn" id="1_l1ocv"]
+[ext_resource type="AnimationLibrary" uid="uid://t885xpck2m0o" path="res://themes/Tiny_Swords/tiny_swords_animation.res" id="3_j1chs"]
 [ext_resource type="Texture2D" uid="uid://d2fc18wxmmf6e" path="res://themes/Tiny_Swords/assets/characters/Warrior_Blue.png" id="3_mrsu2"]
 [ext_resource type="Theme" uid="uid://bn50jp1pavmmx" path="res://themes/Tiny_Swords/tiny_swords_canvas.tres" id="4_0s2uf"]
-[ext_resource type="Script" path="res://themes/Tiny_Swords/dialogue/dialogue.gd" id="4_8v2p0"]
 [ext_resource type="Texture2D" uid="uid://ckkx6v5ckrfpd" path="res://themes/Tiny_Swords/assets/dialogue/Banner_Vertical.png" id="5_wpqw3"]
-[ext_resource type="Script" path="res://themes/Base_Canvas/dialogue/chat_message_ai.gd" id="7_0038y"]
-
-[sub_resource type="Animation" id="Animation_75tyo"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_4elpe"]
-resource_name = "attack_down"
-length = 0.9
-step = 0.15
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [12, 13, 14, 15, 16, 17]
-}
-
-[sub_resource type="Animation" id="Animation_aknv2"]
-resource_name = "attack_left"
-length = 0.9
-step = 0.15
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [24, 25, 26, 27, 28, 29]
-}
-
-[sub_resource type="Animation" id="Animation_rhkkn"]
-resource_name = "attack_right"
-length = 0.9
-step = 0.15
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [30, 31, 32, 33, 34, 35]
-}
-
-[sub_resource type="Animation" id="Animation_3unuo"]
-resource_name = "attack_up"
-length = 0.9
-step = 0.15
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [18, 19, 20, 21, 22, 23]
-}
-
-[sub_resource type="Animation" id="Animation_kb6fg"]
-resource_name = "idle"
-length = 0.9
-loop_mode = 1
-step = 0.15
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5]
-}
-
-[sub_resource type="Animation" id="Animation_8umtp"]
-resource_name = "run"
-length = 0.9
-step = 0.15
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [6, 7, 8, 9, 10, 11]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_5hx07"]
-_data = {
-"RESET": SubResource("Animation_75tyo"),
-"attack_down": SubResource("Animation_4elpe"),
-"attack_left": SubResource("Animation_aknv2"),
-"attack_right": SubResource("Animation_rhkkn"),
-"attack_up": SubResource("Animation_3unuo"),
-"idle": SubResource("Animation_kb6fg"),
-"run": SubResource("Animation_8umtp")
-}
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_o4c6w"]
 texture = ExtResource("5_wpqw3")
 region_rect = Rect2(34.6328, 30.5003, 120.784, 132.116)
 
-[node name="TinySwordsCanvas" type="Node2D"]
-position = Vector2(2373, 152)
-script = ExtResource("1_k04u4")
-metadata/_edit_lock_ = true
-metadata/_edit_group_ = true
+[node name="TinySwordsTest" instance=ExtResource("1_l1ocv")]
+position = Vector2(2397, 291)
+isCanSwitch = true
 
-[node name="Grapic" type="Node2D" parent="."]
-scale = Vector2(-2, 2)
-script = ExtResource("2_ff0a0")
-
-[node name="Pet" type="Sprite2D" parent="Grapic"]
+[node name="Pet" parent="Grapic" index="0"]
 position = Vector2(-1, 33.5)
 texture = ExtResource("3_mrsu2")
 hframes = 6
 vframes = 8
+frame = 5
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Grapic/Pet"]
+[node name="AnimationPlayer" parent="Grapic/Pet" index="0"]
 libraries = {
-"": SubResource("AnimationLibrary_5hx07")
+"tiny_swords": ExtResource("3_j1chs")
 }
-autoplay = "idle"
-next/attack_up = &"RESET"
+autoplay = "tiny_swords/idle"
 
-[node name="Area2D" type="Area2D" parent="Grapic"]
-position = Vector2(2, 9)
+[node name="ClickPolygon" parent="Grapic/Area2D" index="0"]
+polygon = PackedVector2Array(266, 109, -61, 107, -57.5, -116.5, 273, -117)
 
-[node name="ClickPolygon" type="CollisionPolygon2D" parent="Grapic/Area2D"]
-unique_name_in_owner = true
-self_modulate = Color(1, 1, 1, 0.105882)
-polygon = PackedVector2Array(276, 91, -65, 91, -64, -82.5, 274.5, -83.5)
-disabled = true
-
-[node name="StateChange" type="Timer" parent="."]
+[node name="StateChange" type="Timer" parent="." index="2"]
 wait_time = 30.0
 
-[node name="Dialogue_Timer" type="Timer" parent="."]
-wait_time = 20.0
-one_shot = true
-autostart = true
-
-[node name="Dialogue" type="Control" parent="."]
-unique_name_in_owner = true
-layout_mode = 3
-anchors_preset = 0
+[node name="Dialogue" parent="." index="3"]
 offset_left = -514.0
 offset_top = -214.0
 offset_right = -145.0
@@ -193,32 +42,21 @@ scale = Vector2(0.8, 0.8)
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("4_0s2uf")
-script = ExtResource("4_8v2p0")
 
-[node name="PanelContainer" type="PanelContainer" parent="Dialogue"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 56.0
-offset_top = 84.0
-offset_right = 100.0
-offset_bottom = 70.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="PanelContainer" parent="Dialogue" index="0"]
+layout_mode = 2
+anchors_preset = 0
+offset_right = 44.0
+offset_bottom = -14.0
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxTexture_o4c6w")
 
-[node name="MarginContainer" type="MarginContainer" parent="Dialogue/PanelContainer"]
-layout_mode = 2
+[node name="MarginContainer" parent="Dialogue/PanelContainer" index="0"]
 theme_override_constants/margin_left = 64
 theme_override_constants/margin_top = 47
 theme_override_constants/margin_right = 47
 theme_override_constants/margin_bottom = 80
 
-[node name="ChatMessageAI" type="RichTextLabel" parent="Dialogue/PanelContainer/MarginContainer"]
-unique_name_in_owner = true
-layout_mode = 2
+[node name="ChatMessageAI" parent="Dialogue/PanelContainer/MarginContainer" index="0"]
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 25
-bbcode_enabled = true
-script = ExtResource("7_0038y")

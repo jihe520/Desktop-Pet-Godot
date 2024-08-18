@@ -1,6 +1,7 @@
 extends Control
 
 @onready var grid_container: GridContainer = %GridContainer
+const PRESET_PANEL = preload("res://send/store_preset/preset_panel.tscn")
 
 var themes_scenes :Array[String] = [
 	"res://themes/Tiny_Swords/tiny_swords_canvas.tscn",
@@ -12,11 +13,10 @@ func _ready() -> void:
 
 func _change_theme():
 	for i in themes_scenes:
-		var button := Button.new()
+		var preset_panel = PRESET_PANEL.instantiate()
+		preset_panel.panel_type = PresetPanel.PanelType.ThemeType
+		preset_panel.path = i
 		var arr := i.split('/')
-		button.text = arr[arr.size()-1].left(-5)
-		button.pressed.connect(_select_presets.bind(i))
-		grid_container.add_child(button)
+		preset_panel.label_name = arr[arr.size()-1].left(-5)
+		grid_container.add_child(preset_panel)
 
-func _select_presets(path :String):
-	Globals.change_canvas.emit(path)

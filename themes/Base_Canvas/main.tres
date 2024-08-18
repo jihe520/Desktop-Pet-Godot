@@ -5,7 +5,6 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ddhj5"]
 
 [resource]
-default_font_size = 19
 Button/constants/icon_max_width = 0
 RichTextLabel/colors/default_color = Color(1, 0.996094, 0.996094, 1)
 RichTextLabel/styles/normal = SubResource("StyleBoxTexture_lj7mo")

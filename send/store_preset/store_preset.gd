@@ -10,6 +10,7 @@ func _ready() -> void:
 func _load_presets():
 	for preset in Globals.presets:
 		var preset_panel : PresetPanel = PRESET_PANEL.instantiate()
+		preset_panel.panel_type = PresetPanel.PanelType.PresetType
 		preset_panel.label_name = preset
 		preset_panel.preset = Globals.presets[preset]
 		presets_container.add_child(preset_panel)

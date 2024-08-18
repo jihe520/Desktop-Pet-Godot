@@ -52,7 +52,7 @@ func _on_change_canvas(path:String):
 	app_node.get_node(str(old_node_name)).free()
 	app_node.add_child(new_canvas)
 	canvas = new_canvas
-	chat_message_ai = get_node("/root/App/"+ new_canvas.name +"/Dialogue/PanelContainer/MarginContainer/ChatMessageAI")
+	chat_message_ai = canvas.find_child("ChatMessageAI")
 	
 	old_node_name = str(new_canvas.name)
 

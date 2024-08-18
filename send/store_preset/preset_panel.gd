@@ -1,17 +1,31 @@
 extends PanelContainer
 class_name PresetPanel
 
+enum PanelType {
+	PresetType,
+	ThemeType
+}
+
+@export var panel_type : PanelType
+
 var label_name :String = "presetName"
 var preset
+var path : String
 
 func _ready() -> void:
 	%NameLabel.text = label_name
 
-func _on_delet_button_pressed() -> void:
+func _on_delete_button_pressed() -> void:
 	# 删除数据
-	Globals.presets.erase(label_name)
-	Globals.store_all_data()
-	queue_free()
+	if panel_type == PanelType.PresetType:
+		Globals.presets.erase(label_name)
+		Globals.store_all_data()
+		queue_free()
+	elif panel_type == PanelType.ThemeType:
+		queue_free()
 
 func _on_load_button_pressed() -> void:
-	Globals.current_preset = preset
+	if panel_type == PanelType.PresetType:
+		Globals.current_preset = preset
+	elif panel_type == PanelType.ThemeType:
+		Globals.change_canvas.emit(path)

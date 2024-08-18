@@ -21,7 +21,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-current_tab = 1
+current_tab = 3
 
 [node name="对话栏" parent="TabContainer" instance=ExtResource("2_st88t")]
 visible = false
@@ -29,13 +29,13 @@ layout_mode = 2
 
 [node name="存储预设" parent="TabContainer" instance=ExtResource("3_5auwj")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 
 [node name="编辑预设" parent="TabContainer" instance=ExtResource("5_0uube")]
 layout_mode = 2
 
 [node name="主题" parent="TabContainer" instance=ExtResource("5_1e2g1")]
-visible = false
 layout_mode = 2
 
 [connection signal="close_requested" from="." to="." method="_on_close_requested"]
