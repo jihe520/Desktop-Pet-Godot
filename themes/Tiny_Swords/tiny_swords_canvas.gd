@@ -38,9 +38,10 @@ func _on_state_change():
 
 # 20s内没有任何操作，自动隐藏对话节点 ； 有操作就重新记时
 func start_hide_dialogue():
-	dialogue_node.show()
-	
 	dialogue_timer.start(20)
 
 func _on_dialogue_timer():
 	dialogue_node.hide()
+
+func show_dialogue():
+	dialogue_node.show()

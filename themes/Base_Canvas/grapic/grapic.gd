@@ -26,9 +26,11 @@ func _input(event):
 	if event is InputEventMouseMotion and dragging:
 		#窗口位置=鼠标位置  - 鼠标的偏差值
 		DisplayServer.window_set_position(DisplayServer.mouse_get_position()-v2_mouse)
-	
+	# 按下右键
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
-			var SEND := load("res://send/send.tscn")
-			var send = SEND.instantiate()
-			get_node('/root/App').add_child(send)
+			if Globals.cur_send_window_num <= 0:
+				var SEND := load("res://send/send.tscn")
+				var send = SEND.instantiate()
+				get_node('/root/App').add_child(send)
+				Globals.cur_send_window_num += 1

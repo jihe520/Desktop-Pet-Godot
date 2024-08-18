@@ -52,7 +52,6 @@ texture = ExtResource("6_be7al")
 [node name="Canvas" type="Node2D"]
 position = Vector2(2373, 152)
 script = ExtResource("1_s7786")
-metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
 [node name="Grapic" type="Node2D" parent="."]

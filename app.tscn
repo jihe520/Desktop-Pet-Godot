@@ -8,7 +8,7 @@
 script = ExtResource("1_8qkjp")
 
 [node name="Send" parent="." instance=ExtResource("6_h0gyl")]
-position = Vector2i(756, 455)
+position = Vector2i(0, 36)
 size = Vector2i(650, 400)
 
 [node name="Canvas" parent="." instance=ExtResource("2_g0u3y")]

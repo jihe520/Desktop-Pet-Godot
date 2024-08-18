@@ -57,9 +57,9 @@ func _on_name_text_changed(new_text: String) -> void:
 func _on_stream_pressed() -> void:
 	preset["parameters"]["stream"] = stream.button_pressed
 
+# 保存按钮
 func _on_button_pressed() -> void:
 	store_preset_dic()
-	print(preset)
 	# modify the exist preset or add new preset
 	Globals.presets[preset["name"]] = preset
-	Globals.add_new_preset_button.emit(preset)
+	Globals.add_new_preset_panel.emit()

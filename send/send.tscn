@@ -1,14 +1,14 @@
 [gd_scene load_steps=6 format=3 uid="uid://dsohs7cemnsss"]
 
 [ext_resource type="Script" path="res://send/send.gd" id="1_875b0"]
-[ext_resource type="Script" path="res://send/chat_box/chat_msg_edit.gd" id="2_l2itr"]
-[ext_resource type="Script" path="res://send/store_preset/store_preset.gd" id="3_hthny"]
+[ext_resource type="PackedScene" uid="uid://bl466qncqcjch" path="res://send/chat_box/对话栏.tscn" id="2_st88t"]
+[ext_resource type="PackedScene" uid="uid://cyh63pnctatbv" path="res://send/store_preset/存储预设.tscn" id="3_5auwj"]
 [ext_resource type="PackedScene" uid="uid://h2ghtx4klqip" path="res://send/edit_preset/preset.tscn" id="5_0uube"]
 [ext_resource type="PackedScene" uid="uid://c3qe413dfh71i" path="res://send/themes/themes.tscn" id="5_1e2g1"]
 
 [node name="Send" type="Window"]
 title = "SendBox"
-position = Vector2i(806, 303)
+position = Vector2i(806, 258)
 size = Vector2i(600, 500)
 always_on_top = true
 script = ExtResource("1_875b0")
@@ -21,93 +21,21 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-current_tab = 3
+current_tab = 1
 
-[node name="对话栏" type="Control" parent="TabContainer"]
+[node name="对话栏" parent="TabContainer" instance=ExtResource("2_st88t")]
 visible = false
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/对话栏"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
-
-[node name="PanelContainer" type="PanelContainer" parent="TabContainer/对话栏/MarginContainer"]
-layout_mode = 2
-
-[node name="BoxContainer" type="VBoxContainer" parent="TabContainer/对话栏/MarginContainer/PanelContainer"]
-layout_mode = 2
-
-[node name="ToolBar" type="HBoxContainer" parent="TabContainer/对话栏/MarginContainer/PanelContainer/BoxContainer"]
+[node name="存储预设" parent="TabContainer" instance=ExtResource("3_5auwj")]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 3
-
-[node name="SendBar" type="HBoxContainer" parent="TabContainer/对话栏/MarginContainer/PanelContainer/BoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 3.0
-
-[node name="ChatMsgEdit" type="TextEdit" parent="TabContainer/对话栏/MarginContainer/PanelContainer/BoxContainer/SendBar"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(20, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 5.0
-script = ExtResource("2_l2itr")
-
-[node name="Button" type="Button" parent="TabContainer/对话栏/MarginContainer/PanelContainer/BoxContainer/SendBar"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Send"
-
-[node name="存储预设" type="Control" parent="TabContainer"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-script = ExtResource("3_hthny")
-
-[node name="PanelContainer" type="PanelContainer" parent="TabContainer/存储预设"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/存储预设/PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/存储预设/PanelContainer/MarginContainer"]
-layout_mode = 2
-
-[node name="PresetsContainer" type="GridContainer" parent="TabContainer/存储预设/PanelContainer/MarginContainer/ScrollContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/h_separation = 5
-theme_override_constants/v_separation = 5
-columns = 4
 
 [node name="编辑预设" parent="TabContainer" instance=ExtResource("5_0uube")]
 layout_mode = 2
 
 [node name="主题" parent="TabContainer" instance=ExtResource("5_1e2g1")]
+visible = false
 layout_mode = 2
 
 [connection signal="close_requested" from="." to="." method="_on_close_requested"]
-[connection signal="pressed" from="TabContainer/对话栏/MarginContainer/PanelContainer/BoxContainer/SendBar/Button" to="TabContainer/对话栏/MarginContainer/PanelContainer/BoxContainer/SendBar/ChatMsgEdit" method="_on_button_pressed"]

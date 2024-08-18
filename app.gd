@@ -26,9 +26,8 @@ var httpsse_client: HTTPSSEClient
 
 func _ready():
 	Globals.send_button_press.connect(_on_Btn_send)
-	Globals.update_request.connect(_on_Btn_update_preset)
+	Globals.update_current_preset.connect(preset_set)
 	Globals.change_canvas.connect(_on_change_canvas)
-	
 	
 	if stream:
 		httpsse_client = HTTPSSEClient.new()
@@ -53,7 +52,6 @@ func _on_change_canvas(path:String):
 	app_node.get_node(str(old_node_name)).free()
 	app_node.add_child(new_canvas)
 	canvas = new_canvas
-	
 	chat_message_ai = get_node("/root/App/"+ new_canvas.name +"/Dialogue/PanelContainer/MarginContainer/ChatMessageAI")
 	
 	old_node_name = str(new_canvas.name)
@@ -61,14 +59,11 @@ func _on_change_canvas(path:String):
 func load_preset():
 	if !Globals.current_preset.is_empty():
 		preset_set(Globals.current_preset)
-	
-
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("exit"):
 		get_tree().quit()
 		get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
-
 
 func _on_Btn_send(content:Array):
 	if api_key == "" or model == "" or host == "":
@@ -80,9 +75,6 @@ func _on_Btn_send(content:Array):
 		chat_with_stream(content)
 	else:
 		chat_without_stream(content)
-
-func _on_Btn_update_preset(preset :Dictionary):
-	preset_set(preset)
 
 # 复制请求的参数
 func preset_set(preset :Dictionary):
@@ -153,7 +145,7 @@ func _on_new_sse_event(partial_reply: Array, _ai_status_message: ChatMessageAI):
 			httpsse_client.close_connection()
 			chat.append({"role": "assistant", "content":chat_message_ai.text})
 			Globals.is_busy = false
-# hide diague
+			# hide diague
 			canvas.start_hide_dialogue()
 		elif msg == "[EMPTY DELTA]":
 			continue
@@ -161,6 +153,7 @@ func _on_new_sse_event(partial_reply: Array, _ai_status_message: ChatMessageAI):
 			pass
 		else:
 			chat_msg_add(msg)
+			canvas.show_dialogue()
 
 func chat_msg_add(msg:String):
 	if stream:

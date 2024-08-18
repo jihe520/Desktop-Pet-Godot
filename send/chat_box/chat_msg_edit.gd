@@ -62,15 +62,18 @@ func _paste(_caret_index: int) -> void:
 		#print("data:image/png;base64,{%s}" % [base64_image])
 		print("image add")
 		add_texture(image)
-
+	elif DisplayServer.clipboard_has():
+		# 文本粘贴
+		text = DisplayServer.clipboard_get()
+	
 func add_texture(image:Image):
 	var texture_rect : TextureRect = TextureRect.new()
 	texture_rect.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
 	texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	texture_rect.texture = ImageTexture.create_from_image(image)
-	%ToolBar.add_child(texture_rect)
-
+	%ImageContainer.add_child(texture_rect)
+	
 func texture_queue_free():
-	for child in %ToolBar.get_children():
+	for child in %ImageContainer.get_children():
 		child.queue_free()
 

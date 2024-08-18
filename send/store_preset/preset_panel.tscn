@@ -1,0 +1,71 @@
+[gd_scene load_steps=5 format=3 uid="uid://8uufatugkdgi"]
+
+[ext_resource type="Script" path="res://send/store_preset/preset_panel.gd" id="1_lxsx8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_itdk4"]
+bg_color = Color(0.156863, 0.25098, 0.231373, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ij0qx"]
+bg_color = Color(0.156863, 0.25098, 0.231373, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.288818, 0.710938, 0.60211, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pn6fc"]
+bg_color = Color(0.156863, 0.25098, 0.231373, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="PresetPanel" type="PanelContainer"]
+custom_minimum_size = Vector2(300, 70)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_itdk4")
+script = ExtResource("1_lxsx8")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.5
+text = "presetName"
+horizontal_alignment = 1
+
+[node name="LoadButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_ij0qx")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pn6fc")
+text = "加载"
+
+[node name="DeletButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_ij0qx")
+text = "删除"
+
+[connection signal="pressed" from="HBoxContainer/LoadButton" to="." method="_on_load_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/DeletButton" to="." method="_on_delet_button_pressed"]
