@@ -59,5 +59,3 @@ func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		store_all_data()
 		get_tree().quit()
-
-

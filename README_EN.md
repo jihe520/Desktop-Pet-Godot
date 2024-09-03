@@ -7,7 +7,7 @@
 
 🚀 🚀 🚀 A desktop AI pet powered by a large language model and made with Godot. This project aims to provide a versatile and rich desktop AI pet. You can use it as a foundation to create your own unique pet image and character behavior.
 
-- Using Godot: lightweight (90MB memory usage), simple development, provides animation, control UI framework, etc.
+- Using Godot: lightweight, simple development, provides animation, control UI framework, etc.
 - Compatible with many large language models
 - Pre-made character feature with multiple appearances
 - Supports multi-modal capabilities
@@ -78,7 +78,7 @@ With Godot's lightweight and easy-to-learn nature, you can easily create your ow
 ### 🔊 Notes
 
 > [!Caution]
-> 1. The Godot version used for development is 4.2.2 stable, Godot4 should work as well (not tested)
+> 1. The Godot version used for development is 4.3 stable, Godot4 should work as well (not tested)
 > 2. Remember to scale the imported character assets appropriately and adjust the display area (ClickPolygon) size
 > 3. In the upper right corner of Godot, select **Compatibility Mode**
 
@@ -102,3 +102,4 @@ Thanks to the following open-source projects and amazing assets, without which t
 - [tech-dungeon-roguelite](https://trevor-pupkin.itch.io/tech-dungeon-roguelite) - Character assets
 - [tiny-swords](https://pixelfrog-assets.itch.io/tiny-swords) - Character assets
 - [dino-characters](https://arks.itch.io/dino-characters) - Character assets
+- [VPet](https://github.com/LorisYounger/VPet) - Character assets

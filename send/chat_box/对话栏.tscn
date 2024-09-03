@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://7wp65kjcrv2s" path="res://themes/Base_Canvas/main.tres" id="1_54tsj"]
 [ext_resource type="Script" path="res://send/chat_box/chat_msg_edit.gd" id="2_55l2c"]
-[ext_resource type="Texture2D" uid="uid://xf0ly1qyo00e" path="res://img/发送.svg" id="3_4s2ij"]
+[ext_resource type="Texture2D" uid="uid://xf0ly1qyo00e" path="res://themes/assets/发送.svg" id="3_4s2ij"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nt642"]
 border_width_left = 1

@@ -1,0 +1,34 @@
+[remap]
+
+importer="font_data_dynamic"
+type="FontFile"
+uid="uid://by7up6w6upois"
+path="res://.godot/imported/Alibaba PuHuiTi Regular.ttf-09657c8c3d9bb29bdbaa6337dbaaddb9.fontdata"
+
+[deps]
+
+source_file="res://themes/assets/fonts/Alibaba PuHuiTi Regular.ttf"
+dest_files=["res://.godot/imported/Alibaba PuHuiTi Regular.ttf-09657c8c3d9bb29bdbaa6337dbaaddb9.fontdata"]
+
+[params]
+
+Rendering=null
+antialiasing=1
+generate_mipmaps=false
+disable_embedded_bitmaps=true
+multichannel_signed_distance_field=false
+msdf_pixel_range=8
+msdf_size=48
+allow_system_fallback=true
+force_autohinter=false
+hinting=1
+subpixel_positioning=1
+oversampling=0.0
+Fallbacks=null
+fallbacks=[]
+Compress=null
+compress=true
+preload=[]
+language_support={}
+script_support={}
+opentype_features={}

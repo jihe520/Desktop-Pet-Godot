@@ -5,7 +5,6 @@ func _ready() -> void:
 	var screen_size := DisplayServer.screen_get_size()
 	position = screen_size / 2
 
-
 # 关闭发送窗口
 func _on_close_requested() -> void:
 	queue_free()

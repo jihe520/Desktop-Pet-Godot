@@ -13,6 +13,17 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pn6fc"]
+bg_color = Color(0.156863, 0.25098, 0.231373, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ij0qx"]
 bg_color = Color(0.156863, 0.25098, 0.231373, 1)
 border_width_left = 2
@@ -24,17 +35,6 @@ corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pn6fc"]
-bg_color = Color(0.156863, 0.25098, 0.231373, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
 
 [node name="PresetPanel" type="PanelContainer"]
 custom_minimum_size = Vector2(300, 70)
@@ -57,8 +57,8 @@ horizontal_alignment = 1
 [node name="LoadButton" type="Button" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/normal = SubResource("StyleBoxFlat_ij0qx")
 theme_override_styles/hover = SubResource("StyleBoxFlat_pn6fc")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ij0qx")
 text = "加载"
 
 [node name="DeletButton" type="Button" parent="HBoxContainer"]

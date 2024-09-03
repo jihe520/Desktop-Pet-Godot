@@ -13,7 +13,6 @@ func _update_click_polygon() -> void:
 		click_polygon[vec_i] = to_global(click_polygon[vec_i])
 	get_window().mouse_passthrough_polygon = click_polygon
 
-
 #拖拽窗口
 func _input(event):
 	if event is InputEventMouseButton:

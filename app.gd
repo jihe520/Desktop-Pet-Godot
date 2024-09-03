@@ -160,6 +160,3 @@ func chat_msg_add(msg:String):
 		chat_message_ai.add_text(msg)
 	else:
 		chat_message_ai.text = msg
-
-
-

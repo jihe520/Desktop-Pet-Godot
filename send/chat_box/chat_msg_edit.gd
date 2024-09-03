@@ -76,4 +76,3 @@ func add_texture(image:Image):
 func texture_queue_free():
 	for child in %ImageContainer.get_children():
 		child.queue_free()
-
