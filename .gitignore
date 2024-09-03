@@ -1,5 +1,13 @@
 # Godot 4+ specific ignores
 .godot/
-.build/
+build/
 .test/
 .vscode/
+/build/
+/build
+*.exe
+/build/windows
+build/windows/desktop_pet_godot.console.exe
+build/windows/desktop_pet_godot.console.exe
+build/windows/desktop_pet_godot.exe
+build/windows/desktop_pet_godot.pck
