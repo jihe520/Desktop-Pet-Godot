@@ -50,7 +50,7 @@ _data = {
 texture = ExtResource("6_be7al")
 
 [node name="Canvas" type="Node2D"]
-position = Vector2(2373, 152)
+position = Vector2(2751, 223)
 script = ExtResource("1_s7786")
 metadata/_edit_group_ = true
 
@@ -116,4 +116,5 @@ theme_override_constants/margin_bottom = 40
 unique_name_in_owner = true
 layout_mode = 2
 bbcode_enabled = true
+text = "你好，你有什么需要帮助嘛"
 script = ExtResource("7_4g7g5")

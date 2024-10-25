@@ -5,7 +5,7 @@ signal send_button_press(content :Array)
 # 更新请求接口
 signal update_current_preset(presets :Dictionary)
 
-signal add_new_preset_panel()
+signal add_new_preset_panel
 
 signal change_canvas(path :String)
 
@@ -29,6 +29,9 @@ var is_busy = false
 
 # before start , load all presets to presets from loacl
 func _ready() -> void:
+	print('1----------------')
+	print(presets)
+	print(current_preset)
 	load_all_data()
 
 func store_all_data():
@@ -36,8 +39,21 @@ func store_all_data():
 	json_store_file(presets,SAVE_PATH)
 
 func load_all_data():
+	print('2----------------')
+	print(presets)
+	print(current_preset)
+	
 	current_preset = json_read(CURRENT_PRESET_SAVE_PATH)
+	
+	print('3----------------')
+	print(presets)
+	print(current_preset)
+
 	presets = json_read(SAVE_PATH)
+
+	print('4----------------')
+	print(presets)
+	print(current_preset)
 
 # store
 func json_store_file(dic :Dictionary,path :String):
@@ -57,5 +73,6 @@ func json_read(path:String) -> Dictionary:
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		print(presets)
 		store_all_data()
 		get_tree().quit()

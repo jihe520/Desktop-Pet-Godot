@@ -61,11 +61,11 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_pn6fc")
 theme_override_styles/normal = SubResource("StyleBoxFlat_ij0qx")
 text = "加载"
 
-[node name="DeletButton" type="Button" parent="HBoxContainer"]
+[node name="DeleteButton" type="Button" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_ij0qx")
 text = "删除"
 
 [connection signal="pressed" from="HBoxContainer/LoadButton" to="." method="_on_load_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/DeletButton" to="." method="_on_delet_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/DeleteButton" to="." method="_on_delete_button_pressed"]

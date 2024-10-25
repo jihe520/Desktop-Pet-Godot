@@ -8,6 +8,12 @@ func _ready() -> void:
 	_load_presets()
 
 func _load_presets():
+
+		# 清除现有的预设面板
+	for child in presets_container.get_children():
+		if child is PresetPanel:
+			child.queue_free()
+
 	for preset in Globals.presets:
 		var preset_panel : PresetPanel = PRESET_PANEL.instantiate()
 		preset_panel.panel_type = PresetPanel.PanelType.PresetType

@@ -27,5 +27,6 @@ func _on_delete_button_pressed() -> void:
 func _on_load_button_pressed() -> void:
 	if panel_type == PanelType.PresetType:
 		Globals.current_preset = preset
+		print(Globals.current_preset)
 	elif panel_type == PanelType.ThemeType:
 		Globals.change_canvas.emit(path)

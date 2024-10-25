@@ -19,6 +19,8 @@
 
 ## 📙 使用手册
 
+[B站视频介绍](https://www.bilibili.com/video/BV1hBp6eUE91/?vd_source=cd15ef71fe6f4187af03b74e20f12fab)
+
 ### ⬇️ 安装
 
 下载地址：查看 `release`

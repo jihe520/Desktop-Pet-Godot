@@ -1,0 +1,48 @@
+name: Build and Release Windows Version
+
+on:
+  push:
+    branches:
+      - main  # 当推送到 main 分支时触发
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. 检出代码
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2. 设置 Godot 环境
+      - name: Set up Godot
+        uses: firebelley/setup-godot@v1
+        with:
+          godot-version: '4.3'  # 替换为你使用的 Godot 版本
+
+      # 3. 打包 Windows 平台版本
+      - name: Export Windows Build
+        run: |
+          mkdir -p build/windows
+          godot --headless --export "Windows Desktop" build/windows/project.exe
+
+      # 4. 创建发布版本（如果不存在则创建）
+      - name: Create GitHub Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ github.run_number }}
+          release_name: "Windows Build - ${{ github.run_number }}"
+          draft: false  # 是否以草稿形式发布
+          prerelease: false  # 是否为预发布版本
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # 5. 上传构建产物到 Release
+      - name: Upload Build to Release
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: build/windows/project.exe
+          asset_name: project.exe
+          asset_content_type: application/octet-stream

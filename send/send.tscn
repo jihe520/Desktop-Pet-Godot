@@ -8,7 +8,7 @@
 
 [node name="Send" type="Window"]
 title = "SendBox"
-position = Vector2i(806, 258)
+position = Vector2i(130, 36)
 size = Vector2i(600, 500)
 always_on_top = true
 script = ExtResource("1_875b0")
