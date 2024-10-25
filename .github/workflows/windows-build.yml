@@ -1,39 +1,53 @@
-name: Build and Release Windows Version
+name: "godot-ci export (Windows)"
 
-on:
+on: 
   push:
     branches:
-      - main  # 当推送到 main 分支时触发
+      - main  # 每次推送到 main 分支时触发
+
+env:
+  GODOT_VERSION: 4.3
+  EXPORT_NAME: test-project
+  PROJECT_PATH: test-project
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  export-windows:
+    name: Windows Export
+    runs-on: ubuntu-20.04
+    container:
+      image: barichello/godot-ci:4.3
 
     steps:
       # 1. 检出代码
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: true
 
       # 2. 设置 Godot 环境
-      - name: Set up Godot
-        uses: firebelley/setup-godot@v1
-        with:
-          godot-version: '4.3'  # 替换为你使用的 Godot 版本
-
-      # 3. 打包 Windows 平台版本
-      - name: Export Windows Build
+      - name: Setup
         run: |
-          mkdir -p build/windows
-          godot --headless --export "Windows Desktop" build/windows/project.exe
+          mkdir -v -p ~/.local/share/godot/export_templates/
+          mkdir -v -p ~/.config/
+          mv /root/.config/godot ~/.config/godot
+          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
 
-      # 4. 创建发布版本（如果不存在则创建）
+      # 3. 导出 Windows 平台版本
+      - name: Windows Build
+        run: |
+          mkdir -v -p build/windows
+          EXPORT_DIR="$(readlink -f build)"
+          cd $PROJECT_PATH
+          godot --headless --verbose --export-release "Windows Desktop" "$EXPORT_DIR/windows/$EXPORT_NAME.exe"
+
+      # 4. 创建 GitHub Release
       - name: Create GitHub Release
         id: create_release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: v${{ github.run_number }}
           release_name: "Windows Build - ${{ github.run_number }}"
-          draft: false  # 是否以草稿形式发布
+          draft: false  # 是否作为草稿发布
           prerelease: false  # 是否为预发布版本
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -43,8 +57,6 @@ jobs:
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: build/windows/project.exe
-          asset_name: project.exe
+          asset_path: build/windows/${EXPORT_NAME}.exe
+          asset_name: ${EXPORT_NAME}.exe
           asset_content_type: application/octet-stream
-
-          # test action
