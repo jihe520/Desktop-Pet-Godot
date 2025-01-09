@@ -21,7 +21,9 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Globals="*res://classes/Globals.gd"
+Globals="*res://global/Globals.gd"
+SignalManager="*res://global/SignalManager.gd"
+PresetManager="*res://global/PresetManager.gd"
 
 [display]
 

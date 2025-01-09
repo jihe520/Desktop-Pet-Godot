@@ -66,18 +66,18 @@
 
 ```css
 - root(Window)
-  - Globals(Node)
-  - App(Node)
+	- Globals(Node)
+	- App(Node)
 	- Canvas(Node2D) - 角色部分
-	  - Grapic(Node2D) - 显示区域 和 角色管理
-	  - Dialogue(Control) - 对话显示
+		- Grapic(Node2D) - 显示区域 和 角色管理
+		- Dialogue(Control) - 对话显示
 	- Send(Window) - 发送消息
-	  - TabContainer(TabContainer)
+		- TabContainer(TabContainer)
 		- 对话栏(Control)
 		- 存储预设(Control)
 		- 编辑预设(Control)
-		  - Model(PanelContainer)
-		  - Parament(PanelContainer)
+			- Model(PanelContainer)
+			- Parament(PanelContainer)
 ```
 
 ### 🔊 注意

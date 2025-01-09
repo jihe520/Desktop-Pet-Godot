@@ -25,9 +25,9 @@ var http_request : HTTPRequest
 var httpsse_client: HTTPSSEClient 
 
 func _ready():
-	Globals.send_button_press.connect(_on_Btn_send)
-	Globals.update_current_preset.connect(preset_set)
-	Globals.change_canvas.connect(_on_change_canvas)
+	SignalManager.send_button_press.connect(_on_Btn_send)
+	SignalManager.update_current_preset.connect(preset_set)
+	SignalManager.change_canvas.connect(_on_change_canvas)
 	
 	if stream:
 		httpsse_client = HTTPSSEClient.new()
@@ -42,7 +42,7 @@ func _ready():
 	
 	load_preset()
 
-var old_node_name := "Canvas"
+var old_node_name := "Canvas" # 旧的canvas节点名称
 func _on_change_canvas(path:String):
 	var CANVANS := load(path)
 	var new_canvas = CANVANS.instantiate()
@@ -57,8 +57,7 @@ func _on_change_canvas(path:String):
 	old_node_name = str(new_canvas.name)
 
 func load_preset():
-	if !Globals.current_preset.is_empty():
-		preset_set(Globals.current_preset)
+		preset_set(PresetManager.current_preset)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("exit"):
