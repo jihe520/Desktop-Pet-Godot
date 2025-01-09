@@ -44,17 +44,24 @@ func _ready():
 
 var old_node_name := "Canvas" # 旧的canvas节点名称
 func _on_change_canvas(path:String):
-	var CANVANS := load(path)
-	var new_canvas = CANVANS.instantiate()
-	
-	var app_node = get_node("/root/App")
-	
-	app_node.get_node(str(old_node_name)).free()
-	app_node.add_child(new_canvas)
-	canvas = new_canvas
-	chat_message_ai = canvas.find_child("ChatMessageAI")
-	
-	old_node_name = str(new_canvas.name)
+	print("ProjectSettings.load_resource_pack(path): ",path)
+	var success = ProjectSettings.load_resource_pack(path) # .pck
+	if success:
+		var path_tscn = path.get_basename() + "/" + path.get_file().replace(".pck",".tscn")
+		print("path replace",)
+		var CANVANS := load(path_tscn) # tscn
+		var new_canvas = CANVANS.instantiate()
+		
+		var app_node = get_node("/root/App")
+		
+		app_node.get_node(str(old_node_name)).free()
+		app_node.add_child(new_canvas)
+		canvas = new_canvas
+		chat_message_ai = canvas.find_child("ChatMessageAI")
+		
+		old_node_name = str(new_canvas.name)
+	else:
+		assert(false, "not suceess load theme error ")
 
 func load_preset():
 		preset_set(PresetManager.current_preset)
