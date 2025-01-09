@@ -61,5 +61,5 @@ func _on_stream_pressed() -> void:
 func _on_button_pressed() -> void:
 	store_preset_dic()
 	# modify the exist preset or add new preset
-	Globals.presets[preset["name"]] = preset
-	Globals.add_new_preset_panel.emit()
+	PresetManager.presets[preset["name"]] = preset
+	SignalManager.add_new_preset_panel.emit()

@@ -18,15 +18,15 @@ func _ready() -> void:
 func _on_delete_button_pressed() -> void:
 	# 删除数据
 	if panel_type == PanelType.PresetType:
-		Globals.presets.erase(label_name)
-		Globals.store_all_data()
+		PresetManager.presets.erase(label_name)
+		# Globals.store_all_data()
 		queue_free()
 	elif panel_type == PanelType.ThemeType:
 		queue_free()
 
 func _on_load_button_pressed() -> void:
 	if panel_type == PanelType.PresetType:
-		Globals.current_preset = preset
-		print(Globals.current_preset)
+		PresetManager.current_preset = preset
+		
 	elif panel_type == PanelType.ThemeType:
-		Globals.change_canvas.emit(path)
+		SignalManager.change_canvas.emit(path)

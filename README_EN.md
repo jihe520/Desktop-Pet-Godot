@@ -61,18 +61,18 @@ With Godot's lightweight and easy-to-learn nature, you can easily create your ow
 
 ```css
 - root(Window)
-  - Globals(Node)
-  - App(Node)
+	- Globals(Node)
+	- App(Node)
 	- Canvas(Node2D) - Character part
-	  - Graphic(Node2D) - Display area and character management
-	  - Dialogue(Control) - Dialog display
+		- Graphic(Node2D) - Display area and character management
+		- Dialogue(Control) - Dialog display
 	- Send(Window) - Send message
-	  - TabContainer(TabContainer)
+		- TabContainer(TabContainer)
 		- Dialog tab(Control)
 		- Store preset(Control)
 		- Edit preset(Control)
-		  - Model(PanelContainer)
-		  - Parameters(PanelContainer)
+			- Model(PanelContainer)
+			- Parameters(PanelContainer)
 ```
 
 ### 🔊 Notes

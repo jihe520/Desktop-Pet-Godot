@@ -41,7 +41,7 @@ func _send_content():
 		base64_image = ""
 		content.append(image_section)
 	
-	Globals.send_button_press.emit(content)
+	SignalManager.send_button_press.emit(content)
 	Globals.is_busy = true
 	
 	content.clear()

@@ -25,9 +25,9 @@ var http_request : HTTPRequest
 var httpsse_client: HTTPSSEClient 
 
 func _ready():
-	Globals.send_button_press.connect(_on_Btn_send)
-	Globals.update_current_preset.connect(preset_set)
-	Globals.change_canvas.connect(_on_change_canvas)
+	SignalManager.send_button_press.connect(_on_Btn_send)
+	SignalManager.update_current_preset.connect(preset_set)
+	SignalManager.change_canvas.connect(_on_change_canvas)
 	
 	if stream:
 		httpsse_client = HTTPSSEClient.new()
@@ -42,23 +42,29 @@ func _ready():
 	
 	load_preset()
 
-var old_node_name := "Canvas"
+var old_node_name := "Canvas" # 旧的canvas节点名称
 func _on_change_canvas(path:String):
-	var CANVANS := load(path)
-	var new_canvas = CANVANS.instantiate()
-	
-	var app_node = get_node("/root/App")
-	
-	app_node.get_node(str(old_node_name)).free()
-	app_node.add_child(new_canvas)
-	canvas = new_canvas
-	chat_message_ai = canvas.find_child("ChatMessageAI")
-	
-	old_node_name = str(new_canvas.name)
+	print("ProjectSettings.load_resource_pack(path): ",path)
+	var success = ProjectSettings.load_resource_pack(path) # .pck
+	if success:
+		var path_tscn = path.get_basename() + "/" + path.get_file().replace(".pck",".tscn")
+		print("path replace",)
+		var CANVANS := load(path_tscn) # tscn
+		var new_canvas = CANVANS.instantiate()
+		
+		var app_node = get_node("/root/App")
+		
+		app_node.get_node(str(old_node_name)).free()
+		app_node.add_child(new_canvas)
+		canvas = new_canvas
+		chat_message_ai = canvas.find_child("ChatMessageAI")
+		
+		old_node_name = str(new_canvas.name)
+	else:
+		assert(false, "not suceess load theme error ")
 
 func load_preset():
-	if !Globals.current_preset.is_empty():
-		preset_set(Globals.current_preset)
+		preset_set(PresetManager.current_preset)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("exit"):
