@@ -84,6 +84,8 @@ func _on_Btn_send(content:Array):
 
 # 复制请求的参数
 func preset_set(preset :Dictionary):
+	if preset.is_empty():
+		return
 	host = preset["api"]['host']
 	path = preset['api']['path']
 	api_key = preset["api"]['key']

@@ -21,7 +21,8 @@ func _ready() -> void:
 #	检查文件中是否存在current
 	if content.has("current"):
 		current_name = content["current"]
-		current_preset = presets[current_name]
+		if presets.has("current_name"):
+			current_preset = presets[current_name]
 	
 	print(presets)
 
