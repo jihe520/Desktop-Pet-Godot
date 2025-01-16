@@ -56,19 +56,10 @@
 
 ## 🐶 开发自己的桌宠
 
-[wiki 教程](https://github.com/jihe520/Desktop-Pet-Godot.wiki.git)
+[Wiki 教程](https://github.com/jihe520/Desktop-Pet-Godot/wiki)
 
 基于 Godot 的轻便和易学，通过**继承**和 **mod** ，你可以很容易构建独属于你自己的桌面宠物形象。
 
-### 🐾 步骤
-
-1. 准备一套角色帧动： 你可以查看[itch.ion](https://itch.io/game-assets)等，选择一套自己喜欢的下载，**注意版权，仅自己用不用太注意**。
-2. Godot！启动！[下载](https://godotengine.org/download/windows/)
-3. 查看并学习官方文档：不需要害怕，Godot很简单，查看[Animation](https://docs.godotengine.org/en/4.2/tutorials/animation/index.html)。
-4. 开发（continue...）,可以参考theme下面的几个主题的实现（后面有时间出教程）
-
-
-5. [导出](https://docs.godotengine.org/zh-cn/4.x/tutorials/export/index.html)
 
 ### 🏗️ 项目架构
 
