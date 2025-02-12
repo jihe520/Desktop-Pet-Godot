@@ -1,9 +1,9 @@
 <h1 align="center">🐶 Godog 🐶</h1>
 <h2 align="center">AI Godot 桌宠</h2>
 
-<div style="text-align:center">
-    <img src="./img/peticon.png" height=300px>
-</div>
+<p align="center">
+    <img src="./img/peticon.png" height="300px">
+</p>
 
 简体中文 / [English](README_EN.md)
 
