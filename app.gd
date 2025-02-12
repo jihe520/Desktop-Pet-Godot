@@ -64,7 +64,7 @@ func _on_change_canvas(path:String):
 		assert(false, "not suceess load theme error ")
 
 func load_preset():
-		preset_set(PresetManager.current_preset)
+		preset_set(PresetManager.get_current_preset())
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("exit"):

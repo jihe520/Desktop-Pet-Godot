@@ -1,19 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bl466qncqcjch"]
+[gd_scene load_steps=5 format=3 uid="uid://bl466qncqcjch"]
 
 [ext_resource type="Theme" uid="uid://7wp65kjcrv2s" path="res://themes/Base_Canvas/main.tres" id="1_54tsj"]
 [ext_resource type="Script" path="res://send/chat_box/chat_msg_edit.gd" id="2_55l2c"]
 [ext_resource type="Texture2D" uid="uid://xf0ly1qyo00e" path="res://themes/assets/发送.svg" id="3_4s2ij"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nt642"]
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.130249, 0.378906, 0.262348, 1)
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g0h86"]
 bg_color = Color(0.128906, 0.1138, 0.1138, 1)
@@ -31,6 +20,8 @@ corner_radius_bottom_left = 2
 [node name="对话栏" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+offset_right = 600.0
+offset_bottom = 500.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -59,9 +50,8 @@ theme_override_constants/separation = 1
 split_offset = -100
 
 [node name="ToolBar" type="MarginContainer" parent="MarginContainer/PanelContainer/VBoxContainer/VSplitContainer"]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
-size_flags_vertical = 3
-theme = ExtResource("1_54tsj")
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
@@ -69,7 +59,6 @@ theme_override_constants/margin_bottom = 5
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/PanelContainer/VBoxContainer/VSplitContainer/ToolBar"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_nt642")
 
 [node name="ImageContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer/VSplitContainer/ToolBar/PanelContainer"]
 unique_name_in_owner = true

@@ -5,6 +5,8 @@
 [node name="存储预设" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+offset_right = 600.0
+offset_bottom = 500.0
 script = ExtResource("1_fxaif")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]

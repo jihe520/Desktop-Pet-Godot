@@ -26,7 +26,7 @@ func _on_delete_button_pressed() -> void:
 
 func _on_load_button_pressed() -> void:
 	if panel_type == PanelType.PresetType:
-		PresetManager.current_preset = preset
+		PresetManager.set_current_preset(preset) 
 		
 	elif panel_type == PanelType.ThemeType:
 		SignalManager.change_canvas.emit(path)
