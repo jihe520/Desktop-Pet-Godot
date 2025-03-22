@@ -2,7 +2,7 @@
 <h2 align="center">AI Godot 桌宠</h2>
 
 <p align="center">
-    <img src="./img/peticon.png" height="300px">
+		<img src="./img/peticon.png" height="300px">
 </p>
 
 简体中文 / [English](README_EN.md)

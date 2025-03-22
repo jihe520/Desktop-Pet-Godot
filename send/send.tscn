@@ -1,10 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dsohs7cemnsss"]
+[gd_scene load_steps=3 format=3 uid="uid://dsohs7cemnsss"]
 
 [ext_resource type="Script" path="res://send/send.gd" id="1_875b0"]
 [ext_resource type="PackedScene" uid="uid://bl466qncqcjch" path="res://send/chat_box/对话栏.tscn" id="2_st88t"]
-[ext_resource type="PackedScene" uid="uid://cyh63pnctatbv" path="res://send/store_preset/存储预设.tscn" id="3_5auwj"]
-[ext_resource type="PackedScene" uid="uid://h2ghtx4klqip" path="res://send/edit_preset/preset.tscn" id="5_0uube"]
-[ext_resource type="PackedScene" uid="uid://c3qe413dfh71i" path="res://send/themes/themes.tscn" id="5_1e2g1"]
 
 [node name="Send" type="Window"]
 title = "SendBox"
@@ -13,33 +10,20 @@ size = Vector2i(600, 210)
 always_on_top = true
 script = ExtResource("1_875b0")
 
-[node name="TabContainer" type="TabContainer" parent="."]
+[node name="对话栏" parent="." instance=ExtResource("2_st88t")]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 31.0
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-current_tab = 0
-
-[node name="对话栏" parent="TabContainer" instance=ExtResource("2_st88t")]
-layout_mode = 2
-metadata/_tab_index = 0
-
-[node name="存储预设" parent="TabContainer" instance=ExtResource("3_5auwj")]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-metadata/_tab_index = 1
-
-[node name="编辑预设" parent="TabContainer" instance=ExtResource("5_0uube")]
-layout_mode = 2
-metadata/_tab_index = 2
-
-[node name="主题" parent="TabContainer" instance=ExtResource("5_1e2g1")]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 3
 
 [connection signal="close_requested" from="." to="." method="_on_close_requested"]
