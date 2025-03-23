@@ -1,29 +1,99 @@
-[gd_scene load_steps=3 format=3 uid="uid://dsohs7cemnsss"]
+[gd_scene load_steps=7 format=3 uid="uid://dsohs7cemnsss"]
 
 [ext_resource type="Script" path="res://send/send.gd" id="1_875b0"]
-[ext_resource type="PackedScene" uid="uid://bl466qncqcjch" path="res://send/chat_box/对话栏.tscn" id="2_st88t"]
+[ext_resource type="Script" path="res://send/chat_box/chat_msg_edit.gd" id="2_mgk38"]
+[ext_resource type="Texture2D" uid="uid://ds88c21s4x3eu" path="res://send/send.svg" id="4_v3kpj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2485f"]
+bg_color = Color(0.66451, 0.66451, 0.66451, 1)
+border_width_left = 3
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.217373, 0.192446, 0.179047, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0.127736, 0.127736, 0.127736, 0.6)
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d3fd0"]
+bg_color = Color(0.66451, 0.66451, 0.66451, 1)
+border_width_left = 3
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.26078, 0.392887, 0.776982, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0.127736, 0.127736, 0.127736, 0.6)
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bpsgw"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.59105, 0.57162, 0.779816, 1)
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+expand_margin_left = 8.0
+expand_margin_top = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
 
 [node name="Send" type="Window"]
+transparent_bg = true
 title = "SendBox"
 position = Vector2i(2, 36)
-size = Vector2i(600, 210)
+size = Vector2i(600, 100)
 always_on_top = true
+transparent = true
 script = ExtResource("1_875b0")
 
-[node name="对话栏" parent="." instance=ExtResource("2_st88t")]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 31.0
-offset_right = 0.0
-offset_bottom = 0.0
-
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="ChatMsgEdit" type="TextEdit" parent="."]
+unique_name_in_owner = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 6.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxFlat_2485f")
+theme_override_styles/focus = SubResource("StyleBoxFlat_d3fd0")
+wrap_mode = 1
+script = ExtResource("2_mgk38")
+
+[node name="Button" type="Button" parent="ChatMsgEdit"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -101.0
+offset_top = -35.0
+offset_right = -31.0
+offset_bottom = 35.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_bpsgw")
+icon = ExtResource("4_v3kpj")
+icon_alignment = 1
+expand_icon = true
 
 [connection signal="close_requested" from="." to="." method="_on_close_requested"]
+[connection signal="pressed" from="ChatMsgEdit/Button" to="ChatMsgEdit" method="_on_button_pressed"]

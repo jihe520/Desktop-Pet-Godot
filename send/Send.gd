@@ -2,6 +2,7 @@ extends Window
 
 # generate Send window in central Sreen  
 func _ready() -> void:
+	borderless = false
 	var screen_size := DisplayServer.screen_get_size()
 	position = screen_size / 2
 

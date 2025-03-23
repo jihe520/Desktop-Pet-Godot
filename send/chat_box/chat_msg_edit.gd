@@ -74,5 +74,6 @@ func add_texture(image:Image):
 	%ImageContainer.add_child(texture_rect)
 	
 func texture_queue_free():
-	for child in %ImageContainer.get_children():
-		child.queue_free()
+	if %ImageContainer:
+		for child in %ImageContainer.get_children():
+			child.queue_free()
