@@ -35,20 +35,15 @@ shadow_color = Color(0.127736, 0.127736, 0.127736, 0.6)
 shadow_size = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bpsgw"]
-content_margin_left = 5.0
-content_margin_top = 5.0
-content_margin_right = 5.0
-content_margin_bottom = 5.0
-bg_color = Color(0.59105, 0.57162, 0.779816, 1)
-border_color = Color(0.8, 0.8, 0.8, 0)
+bg_color = Color(0.298479, 0.634925, 0.856316, 1)
 corner_radius_top_left = 50
 corner_radius_top_right = 50
 corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
-expand_margin_left = 8.0
-expand_margin_top = 8.0
-expand_margin_right = 8.0
-expand_margin_bottom = 8.0
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
 
 [node name="Send" type="Window"]
 transparent_bg = true
@@ -76,20 +71,25 @@ wrap_mode = 1
 script = ExtResource("2_mgk38")
 
 [node name="Button" type="Button" parent="ChatMsgEdit"]
-custom_minimum_size = Vector2(50, 50)
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -101.0
+offset_left = -90.14
 offset_top = -35.0
-offset_right = -31.0
+offset_right = -20.14
 offset_bottom = 35.0
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 3
+theme_override_styles/focus = SubResource("StyleBoxFlat_bpsgw")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_bpsgw")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_bpsgw")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_bpsgw")
+theme_override_styles/hover = SubResource("StyleBoxFlat_bpsgw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_bpsgw")
 theme_override_styles/normal = SubResource("StyleBoxFlat_bpsgw")
 icon = ExtResource("4_v3kpj")
 icon_alignment = 1

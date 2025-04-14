@@ -75,7 +75,6 @@ func _on_Btn_send(content:Array):
 	if api_key == "" or model == "" or host == "":
 		$Send.title = "请先配置好“请求”参数"
 		return
-	$Send.title = "SendBox"
 	if stream:
 		chat_message_ai.clear()
 		chat_with_stream(content)
@@ -168,3 +167,15 @@ func chat_msg_add(msg:String):
 		chat_message_ai.add_text(msg)
 	else:
 		chat_message_ai.text = msg
+
+
+
+@onready var setting: Window = $Setting
+
+func _on_popup_menu_id_pressed(id: int) -> void:
+	if id == 0:
+		setting.visible =! setting.visible
+		print("setting",setting.visible)
+		
+	elif id == 1:
+		print("exit")

@@ -11,3 +11,4 @@ build/windows/desktop_pet_godot.console.exe
 build/windows/desktop_pet_godot.console.exe
 build/windows/desktop_pet_godot.exe
 build/windows/desktop_pet_godot.pck
+*.DS_Store
