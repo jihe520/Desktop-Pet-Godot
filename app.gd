@@ -33,14 +33,12 @@ func _ready():
 		httpsse_client = HTTPSSEClient.new()
 		add_child(httpsse_client)
 		httpsse_client.new_sse_event.connect(_on_new_sse_event)
-	else:
-		http_request = HTTPRequest.new()
-		add_child(http_request)
-		http_request.request_completed.connect(_on_request_completed)
+
 	
 	system_message = {"role": "system", "content": "简短回复"}
 	
 	load_preset()
+
 
 var old_node_name := "Canvas" # 旧的canvas节点名称
 func _on_change_canvas(path:String):
@@ -73,13 +71,12 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _on_Btn_send(content:Array):
 	if api_key == "" or model == "" or host == "":
-		$Send.title = "请先配置好“请求”参数"
+		$Send.title = "在系统托盘的设置->编辑预设中填写 apikey 并保存"
 		return
 	if stream:
 		chat_message_ai.clear()
 		chat_with_stream(content)
-	else:
-		chat_without_stream(content)
+
 
 # 复制请求的参数
 func preset_set(preset :Dictionary):
@@ -118,24 +115,6 @@ func chat_with_stream(content):
 	})
 	httpsse_client.connect_to_host(host, path, headers, request_body, chat_message_ai, 443)
 
-func chat_without_stream(content):
-	var messages = [system_message]
-	var last_N_messages = chat.slice(-history_count, chat.size(), 1) 
-	messages.append_array(last_N_messages)
-	
-	var new_message = {"role": "user", "content": content} 
-	messages.append(new_message)
-	
-	var request_body = JSON.stringify({
-		"messages": messages,
-		"temperature": temperature,
-		"model": model
-	})
-	var err := http_request.request(request_url, headers, HTTPClient.METHOD_POST, request_body)
-	
-	if err != OK:
-		print("Error initiating HTTP request: ", err)
-
 ## 返回请求
 func _on_request_completed(_result, _response_code, _headers, body):
 	var json = JSON.new()
@@ -165,17 +144,21 @@ func _on_new_sse_event(partial_reply: Array, _ai_status_message: ChatMessageAI):
 func chat_msg_add(msg:String):
 	if stream:
 		chat_message_ai.add_text(msg)
-	else:
-		chat_message_ai.text = msg
 
 
 
 @onready var setting: Window = $Setting
-
 func _on_popup_menu_id_pressed(id: int) -> void:
 	if id == 0:
-		setting.visible =! setting.visible
 		print("setting",setting.visible)
-		
+		setting.visible =! setting.visible
 	elif id == 1:
 		print("exit")
+		get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
+	elif id == 2:
+		print("chatbox")
+		if Globals.cur_send_window_num <= 0:
+			var SEND := load("res://send/send.tscn")
+			var send = SEND.instantiate()
+			get_node('/root/App').add_child(send)
+			Globals.cur_send_window_num += 1

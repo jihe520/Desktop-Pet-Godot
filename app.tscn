@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c2s5ftqtdj82m"]
+[gd_scene load_steps=10 format=3 uid="uid://c2s5ftqtdj82m"]
 
 [ext_resource type="Script" path="res://app.gd" id="1_8qkjp"]
 [ext_resource type="PackedScene" uid="uid://dkmf1gpprqkdb" path="res://themes/Base_Canvas/canvas.tscn" id="2_g0u3y"]
@@ -6,6 +6,9 @@
 [ext_resource type="Script" path="res://setting/setting.gd" id="5_vedsa"]
 [ext_resource type="PackedScene" uid="uid://dsohs7cemnsss" path="res://send/send.tscn" id="6_h0gyl"]
 [ext_resource type="Texture2D" uid="uid://dogtgyuuiq5l5" path="res://assets/dog.svg" id="6_p1y5t"]
+[ext_resource type="Texture2D" uid="uid://dwyjjrgwwblca" path="res://assets/settings.svg" id="7_ap30p"]
+[ext_resource type="Texture2D" uid="uid://15vpu2b5gohr" path="res://assets/square-x.svg" id="8_w68oc"]
+[ext_resource type="Texture2D" uid="uid://sidkqa1sww3g" path="res://assets/message-square-code.svg" id="9_2355x"]
 
 [node name="App" type="Node"]
 script = ExtResource("1_8qkjp")
@@ -15,7 +18,6 @@ title = ""
 position = Vector2i(0, 36)
 
 [node name="Canvas" parent="." instance=ExtResource("2_g0u3y")]
-position = Vector2(2064, 337)
 
 [node name="Setting" parent="." instance=ExtResource("4_f3f5b")]
 title = "Setting"
@@ -29,10 +31,17 @@ icon = ExtResource("6_p1y5t")
 menu = NodePath("../PopupMenu")
 
 [node name="PopupMenu" type="PopupMenu" parent="."]
-item_count = 2
-item_0/text = "setting"
-item_1/text = "exit"
+item_count = 3
+item_0/text = "Setting"
+item_0/icon = ExtResource("7_ap30p")
+item_1/text = "Exit"
+item_1/icon = ExtResource("8_w68oc")
 item_1/id = 1
+item_2/text = "chatbox"
+item_2/icon = ExtResource("9_2355x")
+item_2/id = 2
+
+[node name="Internet" type="Node" parent="."]
 
 [connection signal="close_requested" from="Setting" to="Setting" method="_on_close_requested"]
 [connection signal="id_pressed" from="PopupMenu" to="." method="_on_popup_menu_id_pressed"]

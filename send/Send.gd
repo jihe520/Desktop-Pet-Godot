@@ -4,7 +4,7 @@ extends Window
 func _ready() -> void:
 	borderless = false
 	var screen_size := DisplayServer.screen_get_size()
-	position = screen_size / 2
+	position = screen_size / 2 + Vector2i(-300,300)
 
 # 关闭发送窗口
 func _on_close_requested() -> void:
